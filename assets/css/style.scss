@@ -1,0 +1,161 @@
+/* Write your CSS! */
+@import "bourbon";
+@import "abstracts";
+
+$colorf: #FFF;
+$color0: #000;  
+$color1: #7EAD0D;
+$color2: #EDE7D9;
+
+$background: $colorf;
+$cta: $color1;
+$text-secondary: $color2;
+
+
+html {
+  height: 100%;
+}
+
+body {
+  *, & * {
+    @include box-sizing(border-box);
+  }
+}
+
+h2 {
+  @include font-size(42px);
+  margin-bottom: 15px;
+}
+
+.order-bg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  background: {
+    image: url('../images/food-bg.jpg');
+    repeat: no-repeat;
+    size: cover;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba($color0, .25);
+  }
+
+  &:after {
+    @include transition(transform .5s cubic-bezier(0.7,0,0.3,1));
+    @include transform(translate3d(0, 0, 0));
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    right: 0;
+    width: 55%;
+    background-color: $background;
+    z-index: 3;
+
+    .completed-order & {
+      @include transform(translate3d(100%, 0, 0));
+    }
+  }
+}
+
+.order-bg-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 45%;
+  padding: 50px 50px 70px 50px;
+  color: $colorf;
+}
+
+.order-details {
+  @include transition(opacity .2s);
+  opacity: 1;
+  position: relative;
+  z-index: 2;
+  width: 55%;
+  float: right;
+  padding: 100px;
+
+  .completed-order & {
+    opacity: 0;
+  }
+}
+
+.cd-fields {
+  position: relative;
+  width: 100%;
+  float: left;
+  margin-bottom: 50px;
+  
+  input {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid $color2;
+    background: transparent;
+    padding: 10px 12px;
+    font-size: 1em;
+    color: lighten($color0, 25%);
+  }
+  
+  label {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    color: $text-secondary;
+    padding: 10px 0;
+    @include transition(all .2s ease-in-out);
+    text-transform: uppercase;
+    pointer-events:none;
+  }
+  
+  button {
+    background-color: $color1;
+    border:0;
+    font-size: 1em;
+    color: white;
+    padding: 20px 15px;
+    cursor: pointer;
+    text-transform: uppercase;
+    width: 100%;
+
+    &:focus {
+      outline: 0;
+    }
+  }
+    
+  input {
+    border-bottom: 1px solid darken($text-secondary, 25%);
+
+    &:focus {
+      outline: 0 none;
+
+      ~ label {
+        top: -35px;
+        color: darken($text-secondary, 25%);
+      }
+    }
+  }
+  
+  label {
+    &.on-focus {
+       top: -35px;
+       color: lighten($color0, 55%);
+    }
+  }
+}

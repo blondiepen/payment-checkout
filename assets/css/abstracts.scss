@@ -1,0 +1,121 @@
+// VARIABELS
+$screen-xs          : 0;
+$screen-sm          : 768px;
+$screen-md          : 992px;
+$screen-lg          : 1200px;
+$screen-xl          : 1600px;
+
+$container-max-width: 1600px;
+
+$zfirst             : 1;
+$zsecond            : 2;
+$zthird             : 3;
+$zfourth            : 4;
+$zfifth             : 5;
+
+
+// FUNCTIONS
+
+// Sass function that gets the rem value based on the px value that has been passed in
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return #{$remSize}rem;
+}
+
+// MIXIN
+// rem fallback - credits: http://zerosixthree.se/
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+// center vertically and/or horizontally an absolute positioned element
+@mixin center($xy:xy) {
+  @if $xy == xy {
+    left: 50%;
+    top: 50%;
+    bottom: auto;
+    right: auto;
+    @include transform(translateX(-50%) translateY(-50%));
+  }
+  @else if $xy == x {
+    left: 50%;
+    right: auto;
+    @include transform(translateX(-50%));
+  }
+  @else if $xy == y {
+    top: 50%;
+    bottom: auto;
+    @include transform(translateY(-50%));
+  }
+}
+
+@mixin center3D($xy:xy) {
+  @if $xy == xy {
+    left: 50%;
+    top: 50%;
+    bottom: auto;
+    right: auto;
+    @include transform(translateX(-50%) translateY(-50%) translateZ(0));
+  }
+  @else if $xy == x {
+    left: 50%;
+    right: auto;
+    @include transform(translateX(-50%) translateZ(0));
+  }
+  @else if $xy == y {
+    top: 50%;
+    bottom: auto;
+    @include transform(translateY(-50%) translateZ(0));
+  }
+}
+
+@mixin placeholder {
+  &.placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &::-webkit-input-placeholder { @content; }
+}
+
+@mixin MQ($canvas) {
+  @if $canvas == until XS { // Up to mobile
+    @media all and (max-width: $screen-sm - 1) {
+      @content;
+    }
+  } @else if $canvas == SM { // from tablet
+    @media all and (min-width: $screen-sm) {
+      @content;
+    }
+  } @else if $canvas == SM only { // tablet only
+    @media all and (min-width: $screen-sm) and (max-width: $screen-md - 1) {
+      @content;
+    }
+  } @else if $canvas == MD { // from medium
+    @media all and (min-width: $screen-md) {
+      @content;
+    }
+  } @else if $canvas == MD only { // medium only
+    @media all and (min-width: $screen-md) and (max-width: $screen-lg - 1) {
+      @content;
+    }
+  } @else if $canvas == until MD { // Up to medium
+    @media all and (max-width: $screen-lg - 1) {
+      @content;
+    }
+  } @else if $canvas == LG { // from large
+    @media all and (min-width: $screen-lg) {
+      @content;
+    }
+  } @else if $canvas == LG only { // from large
+    @media all and (min-width: $screen-lg) and (max-width: $screen-xl - 1) {
+      @content;
+    }
+  } @else if $canvas == XL { // from extra large
+    @media all and (min-width: $screen-xl) {
+      @content;
+    }
+  }
+}
+
+// KEYFRAMES
+// Write your animation keyframes here
