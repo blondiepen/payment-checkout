@@ -6,8 +6,10 @@ $colorf: #FFF;
 $color0: #000;  
 $color1: #7EAD0D;
 $color2: #EDE7D9;
+$color3: #F3F3F3;
 
 $background: $colorf;
+$background-secondary: $color3;
 $cta: $color1;
 $text-secondary: $color2;
 
@@ -19,6 +21,7 @@ html {
 }
 
 body {
+  -webkit-font-smoothing: antialiased;
   font-family: $primaryfont;
 
   *, & * {
@@ -83,7 +86,7 @@ body {
   color: $colorf;
 
   h2 {
-    @include font-size(46px);
+    @include font-size(42px);
     margin-bottom: 15px;
   }
 }
@@ -103,7 +106,7 @@ body {
 
   .order-result {
     @include transform(translate3d(0, -35px, 0));
-    color: darken($colorf, 25%);
+    color: darken($colorf, 20%);
     opacity: 0;
 
     .completed-order & {
@@ -132,8 +135,9 @@ body {
   position: absolute;
   left: 40%;
   bottom: 0;
-  padding: 50px 50px 70px 0;
+  padding: 50px 100px 70px 0;
   color: $colorf;
+  margin-top: 15px;
 
   .completed-order & {
     @include transform(translate3d(0, 0, 0));
@@ -142,17 +146,26 @@ body {
 }
 
 .order-details {
+  @include clearfix();  
   @include transition(opacity .2s);
   opacity: 1;
   position: relative;
   z-index: 2;
   width: 55%;
   float: right;
-  padding: 100px;
 
   .completed-order & {
     opacity: 0;
   }
+}
+
+.order-details-summary {
+  background-color: $background-secondary;
+  padding: 100px;
+}
+
+.order-details-form {
+  padding: 100px;
 }
 
 .cd-fields {
