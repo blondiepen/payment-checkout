@@ -371,9 +371,9 @@ img {
   }
 }
 
-@include MQ(MD) {
-  // .order-details-summary, .order-details-form {
-  //   padding: 80px 100px 50px 100px;
-  // }
+@include MQ(LG) {
+  .order-details-summary, .order-details-form {
+    padding: 80px 100px 50px 100px;
+  }
 }
 
