@@ -1,12 +1,17 @@
-/* Write your CSS! */
+/*
+Photo credits: https://unsplash.com/
+Pen inspired by Ivan Bjelajac Dribbble. Check it out: https://dribbble.com/shots/2404232-Credit-card-checkout-02-Daily-UI
+*/
+
 @import "bourbon";
 @import "abstracts";
 
 $colorf: #FFF;
 $color0: #000;  
 $color1: #7EAD0D;
-$color2: #EDE7D9;
+$color2: #626662;
 $color3: #F3F3F3;
+$color4: #A3A2A0;
 
 $background: $colorf;
 $background-secondary: $color3;
@@ -15,9 +20,9 @@ $text-secondary: $color2;
 
 $primaryfont: 'Lato', sans-serif;
 
-
-html {
+html, body {
   height: 100%;
+  text-rendering: optimizeLegibility;
 }
 
 body {
@@ -29,44 +34,49 @@ body {
   }
 }
 
-.order-bg {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 1;
+ul {
+  list-style-type: none;
+  padding-left: 0;
 
-  &:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba($color0, .25);
-  }
+  li {
+    padding: 5px 0 10px;
+    border-bottom: 1px dotted lighten($color4, 15%);
 
-  &:after {
-    @include transition(transform .5s cubic-bezier(0.7,0,0.3,1));
-    @include transform(translate3d(0, 0, 0));
-    content: '';
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    height: 100%;
-    right: 0;
-    width: 55%;
-    background-color: $background;
-    z-index: 3;
+    &.room {
+      @include font-size(18px);
+      font-weight: 700;
+    }
 
-    .completed-order & {
-      @include transform(translate3d(100%, 0, 0));
+    &.extra {
+      color: $color1;
+      font-weight: 700;
+    }
+
+    &.date {
+     @include clearfix();
+         
+      span {
+        display: inline-block;
+        float: right;
+      }
     }
   }
+}
+
+img {
+  &, &.lazyload {
+    @include transition(opacity .6s);
+    opacity: 0;
+  }
+
+  &.lazyloaded {
+    opacity: 1;
+  }
+}
+
+.order-bg {
+  position: fixed;
+  height: 30vh;
 }
 
 .order-bg-media {
@@ -74,6 +84,24 @@ body {
   height: 100%;
   object-fit: cover;
   z-index: 1;
+  display: inline-block;
+}
+
+.bg-media-layer {
+  @include transition(opacity .6s);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba($color0, .25);
+  opacity: 0;
+
+  img.lazyloaded + & {
+    opacity: 1;
+  }
 }
 
 .order-bg-info {
@@ -81,13 +109,14 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  width: 40%;
-  padding: 50px 50px 70px 50px;
+  width: 100%;
+  // padding: 30px 30px 50px 30px;
+  padding: 20px 30px;
   color: $colorf;
 
   h2 {
-    @include font-size(42px);
-    margin-bottom: 15px;
+    @include font-size(32px);
+    margin-bottom: 10px;
   }
 }
 
@@ -97,7 +126,7 @@ body {
 
   .order-result, .order-price {
     @include transition(all .5s cubic-bezier(0.7,0,0.3,1));
-    @include font-size(26px);
+    @include font-size(21px);
     display: inline-block;
     position: absolute;
     left: 0;
@@ -151,8 +180,7 @@ body {
   opacity: 1;
   position: relative;
   z-index: 2;
-  width: 55%;
-  float: right;
+  width: 100%;
 
   .completed-order & {
     opacity: 0;
@@ -161,11 +189,19 @@ body {
 
 .order-details-summary {
   background-color: $background-secondary;
-  padding: 100px;
+  padding: 30px;
+
+  h3 {
+    @include font-size(18px);   
+    text-transform: uppercase;
+    color: $color4;
+    margin-bottom: 40px;
+  }
 }
 
 .order-details-form {
-  padding: 100px;
+  @include clearfix(); 
+  padding: 60px 30px 30px;
 }
 
 .cd-fields {
@@ -173,30 +209,48 @@ body {
   width: 100%;
   float: left;
   margin-bottom: 50px;
-  
+
   input {
+    @include transition(all .2s ease-in-out);
     width: 100%;
     border: 0;
-    border-bottom: 1px solid $color2;
+    border-bottom: 1px solid $color4;
     background: transparent;
     padding: 10px 12px;
     font-size: 1em;
     color: lighten($color0, 25%);
+
+    &:focus {
+      border-bottom-color: $color4;
+      outline: 0;
+
+      + label {
+        @include transform(translate3d(0, -35px, 0));
+        color: $color4;
+      }
+    }
   }
   
   label {
+    @include transition(all .2s ease-in-out);
+    @include transform(translate3d(0, 0, 0));
     position: absolute;
     left: 10px;
     top: 0;
     bottom: 0;
     color: $text-secondary;
     padding: 10px 0;
-    @include transition(all .2s ease-in-out);
     text-transform: uppercase;
     pointer-events:none;
+
+    &.on-focus {
+       @include transform(translate3d(0, -35px, 0));
+       color: $color4;
+    }
   }
   
   button {
+    @include transition(all .2s ease-in-out);
     background-color: $color1;
     border:0;
     font-size: 1em;
@@ -209,25 +263,117 @@ body {
     &:focus {
       outline: 0;
     }
-  }
-    
-  input {
-    border-bottom: 1px solid darken($text-secondary, 25%);
 
-    &:focus {
-      outline: 0 none;
-
-      ~ label {
-        top: -35px;
-        color: darken($text-secondary, 25%);
-      }
-    }
-  }
-  
-  label {
-    &.on-focus {
-       top: -35px;
-       color: lighten($color0, 55%);
+    &:hover {
+      background-color: lighten($color1, 3%);
     }
   }
 }
+
+@include MQ(untilXS) {
+  .order-bg {
+    @include transition(all .5s cubic-bezier(0.7,0,0.3,1));
+    z-index: 2;
+
+    .completed-order & {
+      height: 100vh;
+    }
+  }
+
+  .order-details {
+    z-index: 1;
+    padding-top: 30vh;
+  }
+
+  .order-message-success {
+    @include transform(translate3d(0, 80px, 0));
+    left: 0;
+    top: 0;
+    bottom: auto;
+    padding: 20px 30px;
+  }
+}
+
+
+@include MQ(SM) {
+  .cd-fields {
+    &.small {
+      width: 48%;
+      float: left;
+      margin-right: 4%;
+
+      + .small {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .order-bg {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+
+    &:after {
+      @include transition(transform .5s cubic-bezier(0.7,0,0.3,1));
+      @include transform(translate3d(0, 0, 0));
+      content: '';
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      height: 100%;
+      right: 0;
+      width: 55%;
+      background-color: $background;
+      z-index: 3;
+
+      .completed-order & {
+        @include transform(translate3d(100%, 0, 0));
+      }
+    }
+  }
+
+  .order-bg-info {
+    width: 40%;
+    padding: 50px 50px 70px 50px;
+
+    h2 {
+      @include font-size(42px);
+      margin-bottom: 15px;
+    }
+  }
+
+  .order-bg-switch {
+    @include font-size(26px);
+
+    .order-price, .order-result {
+      font-size: inherit;
+    }
+  }
+
+  .order-details {
+    width: 55%;
+    float: right;
+  }
+
+  .order-details-form {
+    padding: 60px 50px 50px 50px;
+  }
+
+  .order-details-summary {
+    padding: 35px 50px;
+  }
+
+  .order-message-success {
+
+  }
+}
+
+@include MQ(MD) {
+  // .order-details-summary, .order-details-form {
+  //   padding: 80px 100px 50px 100px;
+  // }
+}
+

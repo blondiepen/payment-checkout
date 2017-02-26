@@ -1,24 +1,32 @@
 jQuery(document).ready(function() {
-  var input = $('.cd-fields').find('input'),
-      payButton = $('.js-checkout-pay');
-  
-  input.each(function() {
-    $(this).on('blur', function() {
-      var currentLabel = $(this).next('label'),
-          currentInput = $(this).val();
+  var
+    payForm = $('.js-checkout-pay'),
+    inputs = payForm.find('input');
       
-      if ( currentInput != "" ) {
-        currentLabel.addClass('on-focus');
-        $(this).addClass('on-focus');
-      } else {
-        current.removeClass('on-focus');
-       $(this).removeClass('on-focus');
-      }
-    });
+  // Input fields in form
+  inputs.on('blur', function() {
+    var
+      currentLabel = $(this).next('label'),
+      currentInput = $(this).val();
+    
+    if (currentInput) {
+      currentLabel.addClass('on-focus');
+      $(this).addClass('on-focus');
+    } else {
+      currentLabel.removeClass('on-focus');
+     $(this).removeClass('on-focus');
+    }
   });
 
-  payButton.on('click', function(e) {
+  // Catch the submit event
+  payForm.on('submit', function(e) {
+    // do not submit the form. We're going to send data via ajax request
     e.preventDefault();
-    $('body').addClass('completed-order');
+    // $.ajax({url: $(this).prop('action'), data: $(this).serialize(), method: 'post'}).then(function() {
+      // order has been completed
+      $('body').addClass('completed-order');
+    // }, function(){
+    //  $('body').addClass('error');
+    // });
   });
 });

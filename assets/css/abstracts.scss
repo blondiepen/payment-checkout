@@ -78,7 +78,7 @@ $zfifth             : 5;
 }
 
 @mixin MQ($canvas) {
-  @if $canvas == until XS { // Up to mobile
+  @if $canvas == untilXS { // Up to mobile
     @media all and (max-width: $screen-sm - 1) {
       @content;
     }
@@ -86,7 +86,7 @@ $zfifth             : 5;
     @media all and (min-width: $screen-sm) {
       @content;
     }
-  } @else if $canvas == SM only { // tablet only
+  } @else if $canvas == SMonly { // tablet only
     @media all and (min-width: $screen-sm) and (max-width: $screen-md - 1) {
       @content;
     }
@@ -94,11 +94,11 @@ $zfifth             : 5;
     @media all and (min-width: $screen-md) {
       @content;
     }
-  } @else if $canvas == MD only { // medium only
+  } @else if $canvas == MDonly { // medium only
     @media all and (min-width: $screen-md) and (max-width: $screen-lg - 1) {
       @content;
     }
-  } @else if $canvas == until MD { // Up to medium
+  } @else if $canvas == untilMD { // Up to medium
     @media all and (max-width: $screen-lg - 1) {
       @content;
     }
@@ -106,7 +106,7 @@ $zfifth             : 5;
     @media all and (min-width: $screen-lg) {
       @content;
     }
-  } @else if $canvas == LG only { // from large
+  } @else if $canvas == LGonly { // from large
     @media all and (min-width: $screen-lg) and (max-width: $screen-xl - 1) {
       @content;
     }

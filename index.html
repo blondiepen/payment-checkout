@@ -1,23 +1,32 @@
 <!-- @include _header -->
 
   <section class="order-bg">
-      <img src="assets/images/hotel-bg.jpg" class="order-bg-media" />
+      <img src="assets/images/hotel-bg.jpg" class="order-bg-media lazyload" />
+      <div class="bg-media-layer"></div>
       <div class="order-bg-info">
-        <h2>Your room in Marbella</h2>
+        <h2>Your room in Marrakech</h2>
         <div class="order-bg-switch">
           <span class="order-result">Reserved <i class="fa fa-check"></i></span>
           <span class="order-price">$ 45.50</span>
         </div>
       </div>
-      <p class="order-message-success">Thank you for choosing to stay with us at the Sample Hostel. <br/>Enjoy your stay in Marbella!</p>
+      <p class="order-message-success">Thank you for choosing to stay with us at the Sample Hostel. <br/>Enjoy your stay in Marrakech!</p>
     </div>
   </section>
     
   <section class="order-details">
     <div class="order-details-summary">
       <h3>Your order includes</h3>
+        <ul class="order-details-list">
+          <li class="room">3 nights, 1 Classic Double Room</li>
+          <li class="extra">Free WiFi</li>
+          <li class="extra">Breakfast included</li>
+          <li class="date">Check-in: <span>Thursday, March 16, 2017 (from 15:00)</span></li>
+          <li class="date">Check-out: <span> Sunday, March 19, 2017 (until 11:00)</span></li>
+        </ul>
+      </div>
     </div>
-    <form action="#" method="post" class="order-details-form">
+    <form action="#" method="post" class="order-details-form js-checkout-pay">
       <div class="cd-fields">
         <input type="number" name="cardnumber" required>
         <label for="cardnumber">Card number</label>
@@ -26,16 +35,16 @@
         <input type="text" name="cardholder" required>
         <label for="cardholder">Card holder</label>
       </div>
-      <div class="cd-fields">
+      <div class="cd-fields small">
         <input type="number" name="cardexpiration" required>
-        <label for="cardexpiration">Expires mm/aaaa</label>
+        <label for="cardexpiration">Expires mmaaaa</label>
       </div>
-      <div class="cd-fields">
+      <div class="cd-fields small">
         <input type="number" name="ccardsecure" required>
         <label for="ccardsecure">CCV / CVV</label>
       </div>
       <div class="cd-fields">
-      <button type="submit" class="js-checkout-pay">Book now</button>
+      <button type="submit">Book now</button>
       </div>
     </form>
   </section>
